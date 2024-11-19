@@ -161,10 +161,18 @@
 
 const counter = document.querySelector(".counter-number");
 async function updateCounter() {
-    let response = await fetch(
-        "https://keevakes4xhaavjl4b4mpmbzmy0pcmza.lambda-url.us-east-2.on.aws/"
-    );
-    let data = await response.json();
-    counter.innerHTML = `👀 Views: ${data}`;
+    try {
+        let response = await fetch(
+            "https://keevakes4xhaavjl4b4mpmbzmy0pcmza.lambda-url.us-east-2.on.aws/"
+        );
+        let data = await response.json();
+        console.log("API Response:", data); // Debugging step
+
+        // Adjust this to match the actual property name containing the view count
+        counter.innerHTML = `Views: ${data.views || "Property not found"}`;
+    } catch (error) {
+        console.error("Error fetching the view count:", error);
+        counter.innerHTML = "Views: Unable to load";
+    }
 }
 updateCounter();
