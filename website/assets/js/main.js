@@ -159,7 +159,7 @@
 })(jQuery);
 
 
-const counter = document.querySelector(".counter-number");
+/*const counter = document.querySelector(".counter-number");
 async function updateCounter() {
     try {
         let response = await fetch(
@@ -174,5 +174,17 @@ async function updateCounter() {
         console.error("Error fetching the view count:", error);
         counter.innerHTML = "Views: Unable to load";
     }
+}
+updateCounter();
+*/
+
+
+const counter = document.querySelector(".counter-number");
+async function updateCounter() {
+    let response = await fetch(
+        "https://keevakes4xhaavjl4b4mpmbzmy0pcmza.lambda-url.us-east-2.on.aws/"
+    );
+    let data = await response.json();
+    counter.innerHTML = `👀 Views: ${data}`;
 }
 updateCounter();
